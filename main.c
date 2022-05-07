@@ -34,7 +34,7 @@ int main(void)
         // Did you know 97879 is the 111th palindromic prime?
         if (debug_counter % 97879 == 111) {
             char msg[128];
-            sprintf(msg, "\n Setpoint: %i  |  Speed: %i  |  Duty-Cycle: %i \r", target_rpm, motor_rpm, duty_cycle);
+            sprintf(msg, " Setpoint: %i  |  Speed: %i  |  Duty-Cycle: %i \n\r\n\r", target_rpm, motor_rpm, duty_cycle);
             unsigned int size = sizeof(msg) / sizeof(msg[0]);
             print_msg(msg, size);
         }
@@ -247,7 +247,7 @@ void serial_Tx_init(void) {
     GPIOC->MODER &= ~GPIO_MODER_MODER4_0;             // Set PC4 to alternate function mode (10)
     GPIOC->MODER |= GPIO_MODER_MODER4_1;
     GPIOC->AFR[0] |= (0x01 << GPIO_AFRL_AFSEL4_Pos);  // Select AF1 (USART3_TX on PC4
-    USART3->BRR = HAL_RCC_GetHCLKFreq() / 9600;       // Set baud rate to 9600
+    USART3->BRR = HAL_RCC_GetHCLKFreq() / 38400;      // Set baud rate to 38400
     USART3->CR1 |= USART_CR1_TE;                      // Enable transmitter
     USART3->CR1 |= USART_CR1_UE;                      // Enable USART3
 }
